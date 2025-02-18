@@ -2,19 +2,16 @@
   "schemaVersion": 1,
   "id": "betaontheair",
   "version": "${version}",
-
   "name": "Beta On The Air",
   "description": "Connect your Twitch chat to your ingame chat",
   "authors": [
     "PoeticRainbow"
   ],
   "contact": {
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "sources": "https://github.com/PoeticRainbow/BetaOnTheAir"
   },
-
   "license": "GNU GPLv3",
   "icon": "assets/betaontheair/icon.png",
-
   "environment": "*",
   "entrypoints": {
     "client": [
@@ -24,12 +21,8 @@
   "mixins": [
     "modid.mixins.json"
   ],
-
   "depends": {
     "fabricloader": ">=0.13.3",
     "minecraft": "1.0.0-beta.7.3"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
