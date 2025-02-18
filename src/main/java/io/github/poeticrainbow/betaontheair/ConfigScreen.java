@@ -1,6 +1,5 @@
 package io.github.poeticrainbow.betaontheair;
 
-import com.github.twitch4j.chat.TwitchChat;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.components.Button;
@@ -9,6 +8,7 @@ import net.minecraft.client.gui.screens.Screen;
 
 @Environment(EnvType.CLIENT)
 public class ConfigScreen extends Screen {
+    public int service = 0; // 0 Twitch, 1 YouTube
     public EditBox username;
 
     @Override
@@ -16,6 +16,15 @@ public class ConfigScreen extends Screen {
         username = new EditBox(this, this.font, this.width / 2 - 100, 95, 200, 20, "");
         this.buttons.add(new Button(0, this.width / 2 - 100 - 1, 120, 100, 20, "Disconnect"));
         this.buttons.add(new Button(1, this.width / 2 + 1, 120, 100, 20, "Connect"));
+        this.buttons.add(new Button(2, this.width/2 - 50, 140, 100, 20, "Service: Twitch"));
+    }
+
+    public boolean isTwitch() {
+        return service == 0;
+    }
+
+    public boolean isYoutube() {
+        return service == 1;
     }
 
     @Override
@@ -32,7 +41,7 @@ public class ConfigScreen extends Screen {
         renderBackground();
         super.render(mouseX, mouseY, tickDelta);
         username.render();
-        this.drawCenteredString(font, "Twitch Username", this.width/2, 80, 0xFFFFFF);
+        this.drawCenteredString(font, "Twitch Username or YouTube Video Id", this.width/2, 80, 0xFFFFFF);
     }
 
     @Override
@@ -43,13 +52,25 @@ public class ConfigScreen extends Screen {
 
     @Override
     protected void onButtonClick(Button button) {
-        TwitchChat chat = BetaOnTheAir.twitchClient.getChat();
         if (button.id == 0) {
-            username.setValue("");
             BetaOnTheAir.disconnectAllChannels();
         }
         if (button.id == 1) {
-            chat.joinChannel(username.getValue());
+            if (isTwitch()) {
+                BetaOnTheAir.twitchClient.getChat().joinChannel(username.getValue());
+            }
+            if (isYoutube()) {
+                BetaOnTheAir.youtubeClient.joinChannel(username.getValue());
+            }
+        }
+        if (button.id == 2) {
+            if (service == 0) {
+                service = 1;
+                button.message = "Service: YouTube";
+            } else if (service == 1) {
+                service = 0;
+                button.message = "Service: Twitch";
+            }
         }
     }
 

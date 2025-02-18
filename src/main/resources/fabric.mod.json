@@ -3,7 +3,7 @@
   "id": "betaontheair",
   "version": "${version}",
   "name": "Beta On The Air",
-  "description": "Connect your Twitch chat to your ingame chat",
+  "description": "Connect your Twitch or YouTube chat to your ingame chat",
   "authors": [
     "PoeticRainbow"
   ],
