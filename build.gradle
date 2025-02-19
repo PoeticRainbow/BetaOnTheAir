@@ -35,6 +35,7 @@ dependencies {
 
     implementation 'com.github.twitch4j:twitch4j:1.23.0'
     implementation 'com.github.kusaanko:YouTubeLiveChat:1.6'
+    include 'com.github.kusaanko:YouTubeLiveChat:1.6'
 }
 
 processResources {

@@ -11,12 +11,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PauseScreen.class)
 public class PauseScreenMixin extends Screen {
-    @Inject(method = "init", at = @At("TAIL"))
+    @Inject(method = "init()V", at = @At("TAIL"))
     private void inject(CallbackInfo ci) {
         this.buttons.add(new Button(32, this.width/2 - 100, 0, "On The Air..."));
     }
 
-    @Inject(method = "onButtonClick", at = @At("TAIL"))
+    @Inject(method = "onButtonClick(Lnet/minecraft/client/gui/components/Button;)V", at = @At("TAIL"))
     private void inject(Button button, CallbackInfo ci) {
         if (button.id == 32) {
             this.minecraft.setScreen(new ConfigScreen());

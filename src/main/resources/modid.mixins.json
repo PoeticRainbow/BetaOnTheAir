@@ -4,9 +4,9 @@
   "package": "io.github.poeticrainbow.betaontheair.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PauseScreenMixin"
   ],
   "client": [
+    "PauseScreenMixin",
     "MinecraftAccessor"
   ],
   "injectors": {
